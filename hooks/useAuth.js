@@ -12,6 +12,7 @@ export  default function useAuth() {
       }
     } catch (err) {
       setError(err.message);
+      throw err;
     }
   };
   return { register, error };
