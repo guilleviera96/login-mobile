@@ -5,7 +5,6 @@ import { StyleSheet} from 'react-native';
 export default function Layout() {
     return (
         <>
-        //estilos del header
             <Stack
                 screenOptions={{
                     headerStyle:

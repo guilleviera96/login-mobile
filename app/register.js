@@ -15,8 +15,9 @@ export default function Register() {
       return;
     }
     addUser({ username, name, password });
+    console.log(username, name, password);
     alert(`Usuario registrado: ${username}`);
-
+    
     router.push('/login');
   };
 
