@@ -5,6 +5,7 @@ import { StyleSheet} from 'react-native';
 export default function Layout() {
     return (
         <>
+        //estilos del header
             <Stack
                 screenOptions={{
                     headerStyle:
@@ -30,15 +31,3 @@ export default function Layout() {
 
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-    },
-    message: {
-        textAlign: 'center',
-        marginTop: 10,
-        fontSize: 18,
-        color: '#000000ff',
-    },
-});
