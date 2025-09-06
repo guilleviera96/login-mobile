@@ -3,7 +3,9 @@ import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import CustomButton from '../components/CustomButton';
 import { addUser } from '../utils/userStore';
+import useAuth from '../hooks/useAuth';
 export default function Register() {
+  const {register, error} = useAuth();
   const [username, setUsername] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -15,6 +17,7 @@ export default function Register() {
       return;
     }
     addUser({ username, name, password });
+    register({ username, name, password });
     console.log(username, name, password);
     alert(`Usuario registrado: ${username}`);
     
