@@ -1,5 +1,5 @@
 import axios from "axios";
-const axios = require('axios');
+
 const URL = 'https://template-express-api.onrender.com';
 
 const api = axios.create({

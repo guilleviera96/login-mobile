@@ -1,9 +1,9 @@
 import { View, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
-import CustomButton from '../components/CustomButton';
-import { addUser } from '../utils/userStore';
-import useAuth from '../hooks/useAuth';
+import CustomButton from '../../components/CustomButton';
+import { addUser } from '../../utils/userStore';
+import useAuth from '../../hooks/useAuth';
 export default function Register() {
   const {register, error} = useAuth();
   const [username, setUsername] = useState('');

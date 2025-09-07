@@ -1,9 +1,10 @@
-import { View, TextInput, Button, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
-import CustomButton from '../components/CustomButton';
-import { findUser } from '../utils/userStore';
+import CustomButton from '../../components/CustomButton';
+import { findUser } from '../../utils/userStore';
 export default function Login() {
+    // const {login, token, loading, error} = useAuth()
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();
