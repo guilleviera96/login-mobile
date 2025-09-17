@@ -1,9 +1,9 @@
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-export default function CustomButton({ title, onPress, color = '#1e90ff', textColor = '#fff' }) {
+export default function CustomButton({ title, onPress }) {
   return (
-    <TouchableOpacity style={[styles.button, { backgroundColor: color }]} onPress={onPress}>
-      <Text style={[styles.text, { color: textColor }]}>{title}</Text>
+    <TouchableOpacity style={[styles.button, styles.bgColor]} onPress={onPress}>
+      <Text style={[styles.text, styles.txtColor]}>{title}</Text>
     </TouchableOpacity>
   );
 }
@@ -20,4 +20,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 19,
   },
+  bgColor: {
+    backgroundColor: '#fbfb9eff',
+  },
+  txtColor: {
+    color: "#000000",
+  }
 });

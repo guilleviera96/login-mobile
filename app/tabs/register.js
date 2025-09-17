@@ -2,11 +2,13 @@ import { View, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-nativ
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import CustomButton from '../../components/CustomButton';
+import { useNavigation } from 'expo-router';
 // import { addUser } from '../utils/userStore';
 import useAuth from '../../hooks/useAuth';
+
 export default function Register() {
     const { register, loading, error } = useAuth();
-
+    const navigation = useNavigation();
     const [username, setUsername] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
@@ -24,7 +26,8 @@ export default function Register() {
         console.log(username, name, password);
         alert(`Usuario registrado: ${username}`);
 
-        router.push('/login');
+        // router.push('login');
+        navigation.navigate('login');
     };
 
     const goToLogin = () => {
@@ -55,8 +58,6 @@ export default function Register() {
             <CustomButton
                 title="Registrarse"
                 onPress={handleRegister}
-                color='#fbfb9eff'
-                textColor="#000000"
             />
 
             {/* btn para volver al login */}

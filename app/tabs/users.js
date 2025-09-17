@@ -1,4 +1,3 @@
-import React from "react";
 import { View, Text, FlatList, ActivityIndicator } from "react-native";
 import { useUsers } from "../../hooks/useUsers";
 
