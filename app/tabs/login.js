@@ -3,14 +3,17 @@ import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import CustomButton from '../../components/CustomButton';
 import { findUser } from '../../utils/userStore';
+// import useAuth from '../../hooks/useAuth';
 export default function Login() {
     // const {login, token, loading, error} = useAuth()
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    // const [login, loading, error] = useAuth(false);
     const router = useRouter();
 
     const handleLogin = () => {
         if (!username.trim() || !password.trim()) {
+            // login({ username, password })
             alert("Completa usuario ycontraseña");
             return;
         }
@@ -19,8 +22,14 @@ export default function Login() {
             alert("Usuario o contraseña incorrectos");
             return;
         }
-
-        router.push({ pathname: '/profile', params: { username: user.username, name: user.name } });
+        // login({ username, password })
+        //     .then((data) => {
+        //         alert(`Bienvenido ${data.user.name}`);
+        //         router.push({ pathname: '/profile', params: { username: user.username, name: user.name } });
+        //     })
+        //     .catch((err) => {
+        //         alert(err.message);
+        //     });
     };
 
 
