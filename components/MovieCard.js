@@ -15,7 +15,7 @@ const MovieCard = ({ id, title, rating, image }) => {
     >
       <Image
         source={{ uri: image }}
-        style={{ width: 210, height: 295, borderRadius: 8 }}
+        style={{ width: 300, height: 420, borderRadius: 22.5 }}
         resizeMode="cover"
       />
       <Text style={{ fontSize: 20, fontWeight: 'bold', marginTop: 8 }}>{title}</Text>
