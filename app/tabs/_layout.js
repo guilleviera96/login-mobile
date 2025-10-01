@@ -4,27 +4,9 @@ export default function TabLayout() {
   return (
     <Tabs screenOptions={{ tabBarActiveTintColor: "blue" }}>
       <Tabs.Screen
-        name="register"
+        name="lista"
         options={{
-          title: "Registrarse",
-        }}
-      />
-      <Tabs.Screen
-        name="login"
-        options={{
-          title: "Loguearse",
-        }}
-      />
-      <Tabs.Screen
-        name="users"
-        options={{
-          title: "Users",
-        }}
-      />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: "Perfil de usuario",
+          title: "Peliculas",
         }}
       />
     </Tabs>

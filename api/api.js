@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = 'https://template-express-api.onrender.com';
+const URL = 'https://api.tvmaze.com';
 
 const api = axios.create({
     baseURL: URL,
