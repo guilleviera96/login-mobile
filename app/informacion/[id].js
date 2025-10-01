@@ -43,7 +43,7 @@ export default function Informacion() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Image source={{ uri: data.image?.original }} style={styles.image} />
+      <Image source={{ uri: data.image?.original }} style={styles.image} resizeMode="cover" />
       <Text style={styles.title}>{data.name}</Text>
       <Text style={styles.rating}>{data.rating?.average || 'Sin calificación'}</Text>
       <Text style={styles.genres}>{data.genres.join(', ')}</Text>

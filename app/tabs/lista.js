@@ -3,23 +3,23 @@ import { useMovieList } from '../../hooks/useMovieList';
 import MovieCard from '../../components/MovieCard';
 
 const Lista = () => {
-    const { items} = useMovieList('shows');
-    return (
-        <ScrollView contentContainerStyle={styles.scrollContainer}>
-            <View style={styles.cardWrapper}>
-                {items.map(item => (
-                    <MovieCard
-  key={item.id}
-  id={item.id}
-  title={item.title}
-  rating={item.rating}
-  image={item.image}
-/>
+  const { items } = useMovieList('shows');
+  return (
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <View style={styles.cardWrapper}>
+        {items.map(item => (
+          <MovieCard
+            key={item.id}
+            id={item.id}
+            title={item.title}
+            rating={item.rating}
+            image={item.image}
+          />
 
-                ))}
-            </View>
-        </ScrollView>
-    );
+        ))}
+      </View>
+    </ScrollView>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
   },
   cardWrapper: {
-    alignItems: 'center', 
-    gap: 12, 
+    alignItems: 'center',
+    gap: 12,
   },
 });
 
