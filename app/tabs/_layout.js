@@ -6,7 +6,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="lista"
         options={{
-          title: "Peliculas",
+          title: "Series",
         }}
       />
     </Tabs>
