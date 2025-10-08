@@ -4,9 +4,15 @@ export default function TabLayout() {
   return (
     <Tabs screenOptions={{ tabBarActiveTintColor: "blue" }}>
       <Tabs.Screen
-        name="lista"
+        name='lista'
         options={{
-          title: "Series",
+          title: 'Series',
+        }}
+      />
+      <Tabs.Screen
+        name='informacion/[id]'
+        options={{
+          title: 'Informacion',
         }}
       />
     </Tabs>

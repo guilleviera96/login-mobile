@@ -6,9 +6,10 @@ export const useMovieList = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        //obtengo la lista de peliculas 
         const fetchList = async () => {
             try {
-                const response = await axios.get('https://api.tvmaze.com/shows'); // sin filtro
+                const response = await axios.get('https://api.tvmaze.com/shows');
                 const data = response.data.map(show => ({
                     id: show.id,
                     title: show.name,

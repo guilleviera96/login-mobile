@@ -16,7 +16,7 @@ export default function Informacion() {
         const response = await axios.get(`https://api.tvmaze.com/shows/${id}`);
         setData(response.data);
       } catch (error) {
-        console.error('Error al cargar detalles:', error);
+        console.error('Error:', error);
       } finally {
         setLoading(false);
       }
@@ -28,7 +28,7 @@ export default function Informacion() {
   if (loading) {
     return (
       <View style={styles.loader}>
-        <ActivityIndicator size="large" color="#007AFF" />
+        <ActivityIndicator size="large" color='#50b4a3ff' />
       </View>
     );
   }
@@ -45,10 +45,11 @@ export default function Informacion() {
     <ScrollView contentContainerStyle={styles.container}>
       <Image source={{ uri: data.image?.original }} style={styles.image} resizeMode="cover" />
       <Text style={styles.title}>{data.name}</Text>
-      <Text style={styles.rating}>{data.rating?.average || 'Sin calificación'}</Text>
-      <Text style={styles.genres}>{data.genres.join(', ')}</Text>
+      <Text style={styles.rating}>Calificacion: {data.rating?.average || 'Sin calificación'}</Text>
+      <Text style={styles.genres}>{data.genres.join(' - ')}</Text>
+
       {/* eliminar etiquetas html */}
-      <Text style={styles.summary}>{data.summary?.replace(/<[^>]+>/g, '')}</Text>
+      <Text style={styles.summary}>{data.summary}</Text>
     </ScrollView>
   );
 }
@@ -68,26 +69,27 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: 400,
-    borderRadius: 12,
     marginBottom: 16,
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center',
   },
   rating: {
-    fontSize: 16,
-    color: '#666',
-    marginVertical: 4,
+    fontSize: 18,
+    color: '#000000ff',
+    marginVertical: 5,
   },
   genres: {
-    fontSize: 14,
+    fontSize: 18,
+    fontWeight: '455',
     color: '#50b4a3ff',
     marginBottom: 8,
   },
   summary: {
-    fontSize: 18,
+    fontSize: 20,
+    fontWeight: '450',
     lineHeight: 20,
     textAlign: 'justify',
   },
