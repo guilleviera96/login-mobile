@@ -1,8 +1,7 @@
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { View, Text, Image, ActivityIndicator, ScrollView, StyleSheet } from 'react-native';
-import axios from 'axios';
-
+import api from '../../api/api';
 export default function Informacion() {
   const { id } = useLocalSearchParams();
   const [data, setData] = useState(null);
@@ -13,7 +12,7 @@ export default function Informacion() {
 
     const fetchDetails = async () => {
       try {
-        const response = await axios.get(`https://api.tvmaze.com/shows/${id}`);
+        const response = await api.get(`/shows/${id}`);
         setData(response.data);
       } catch (error) {
         console.error('Error:', error);

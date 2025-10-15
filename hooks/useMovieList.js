@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-
+import api from '../api/api';
 export const useMovieList = () => {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -9,7 +8,7 @@ export const useMovieList = () => {
         //obtengo la lista de peliculas 
         const fetchList = async () => {
             try {
-                const response = await axios.get('https://api.tvmaze.com/shows');
+                const response = await api.get('/shows');
                 const data = response.data.map(show => ({
                     id: show.id,
                     title: show.name,
