@@ -2,6 +2,9 @@ import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { View, Text, Image, ActivityIndicator, ScrollView, StyleSheet } from 'react-native';
 import api from '../../api/api';
+
+
+
 export default function Informacion() {
   const { id } = useLocalSearchParams();
   const [data, setData] = useState(null);
