@@ -1,30 +1,18 @@
 import { useLocalSearchParams } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { View, Text, Image, ActivityIndicator, ScrollView, StyleSheet } from 'react-native';
-import api from '../../api/api';
+import { useMovieList } from '../../hooks/useMovieList';
+
 
 
 
 export default function Informacion() {
   const { id } = useLocalSearchParams();
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { getShowById, showsById, loading } = useMovieList();
 
   useEffect(() => {
     if (!id) return;
-
-    const fetchDetails = async () => {
-      try {
-        const response = await api.get(`/shows/${id}`);
-        setData(response.data);
-      } catch (error) {
-        console.error('Error:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchDetails();
+    getShowById(id);
   }, [id]);
 
   if (loading) {
@@ -35,7 +23,7 @@ export default function Informacion() {
     );
   }
 
-  if (!data) {
+  if (!showsById) {
     return (
       <View style={styles.loader}>
         <Text>Error al buscar informacion</Text>
@@ -45,14 +33,13 @@ export default function Informacion() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Image source={{ uri: data.image?.original }} style={styles.image} resizeMode="cover" />
-      <Text style={styles.title}>{data.name}</Text>
-      <Text style={styles.rating}>Calificacion: {data.rating?.average || 'Sin calificación'}</Text>
-      <Text style={styles.genres}>{data.genres.join(' - ')}</Text>
-
-      {/* eliminar etiquetas html */}
-      <Text style={styles.summary}>{data.summary}</Text>
-    </ScrollView>
+      <Image source={{ uri: showsById.image?.original }} style={styles.image} resizeMode="cover" />
+      <Text style={styles.title}>{showsById.name}</Text>
+      <Text style={styles.rating}>Calificacion: {showsById.rating?.average || 'Sin calificación'}</Text>
+      <Text style={styles.genres}>{showsById.genres?.join(' - ')}</Text>
+      <Text style={styles.summary}>
+        {showsById.summary?.replace(/<[^>]+>/g, '')}
+      </Text>    </ScrollView>
   );
 }
 

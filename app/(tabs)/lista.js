@@ -3,11 +3,11 @@ import { useMovieList } from '../../hooks/useMovieList';
 import MovieCard from '../../components/MovieCard';
 
 const Lista = () => {
-  const { items } = useMovieList('shows');
+  const { items: shows } = useMovieList('shows');
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.cardWrapper}>
-        {items.map(item => (
+        {shows.map(item => (
           <MovieCard
             key={item.id}
             id={item.id}
