@@ -1,9 +1,13 @@
-import { Text, Image, TouchableOpacity, View } from 'react-native';
-import { useRouter } from 'expo-router';
-import { agregarFavoritos, eliminarFavorito, obtenerFavoritos } from '../utils/favoritosActions';
-import { useEffect, useState } from 'react';
-
-const MovieCard = ({ id, title, rating, image }) => {
+import { Text, Image, TouchableOpacity, View } from "react-native";
+import { useRouter } from "expo-router";
+import {
+  agregarFavoritos,
+  eliminarFavorito,
+  obtenerFavoritos,
+} from "../utils/favoritosActions";
+import { useEffect, useState } from "react";
+import mostrarRating from "../functions/mostrarRating";
+const MovieCard = ({ id, title, rating, image, onRemoveFavorite }) => {
   const router = useRouter();
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -19,6 +23,7 @@ const MovieCard = ({ id, title, rating, image }) => {
     if (isFavorite) {
       await eliminarFavorito(id);
       setIsFavorite(false);
+      if (onRemoveFavorite) onRemoveFavorite(id);
     } else {
       await agregarFavoritos(id);
       setIsFavorite(true);
@@ -26,7 +31,7 @@ const MovieCard = ({ id, title, rating, image }) => {
   };
 
   return (
-    <View style={{ marginBottom: 24, alignItems: 'center' }}>
+    <View style={{ marginBottom: 24, alignItems: "center" }}>
       <TouchableOpacity onPress={() => router.push(`/informacion/${id}`)}>
         <Image
           source={{ uri: image }}
@@ -35,21 +40,24 @@ const MovieCard = ({ id, title, rating, image }) => {
         />
       </TouchableOpacity>
 
-      <Text style={{ fontSize: 20, fontWeight: 'bold', marginTop: 8 }}>{title}</Text>
-      <Text style={{ fontSize: 20, color: 'black' }}>{rating}</Text>
-
+      <Text style={{ fontSize: 20, fontWeight: "bold", marginTop: 8 }}>
+        {title}
+      </Text>
+      <Text style={{ fontSize: 20, color: "black" }}>
+        {mostrarRating(rating)} ({rating})
+      </Text>
       <TouchableOpacity
         onPress={toggleFavorite}
         style={{
           marginTop: 10,
-          backgroundColor: isFavorite ? '#df2121ff' : '#50b4a3ff',
+          backgroundColor: isFavorite ? "#df2121ff" : "#50b4a3ff",
           paddingHorizontal: 16,
           paddingVertical: 8,
           borderRadius: 8,
         }}
       >
-        <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'black' }}>
-          {isFavorite ? 'Quitar de Favoritos' : 'Agregar a Favoritos'}
+        <Text style={{ fontSize: 16, fontWeight: "bold", color: "black" }}>
+          {isFavorite ? "Quitar de Favoritos" : "Agregar a Favoritos"}
         </Text>
       </TouchableOpacity>
     </View>
@@ -57,3 +65,5 @@ const MovieCard = ({ id, title, rating, image }) => {
 };
 
 export default MovieCard;
+
+

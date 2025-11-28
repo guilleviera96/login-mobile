@@ -1,4 +1,3 @@
-// utils/favoritosActions.js
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const FAVORITOS_KEY = 'favoritos';
@@ -37,7 +36,7 @@ export const obtenerFavoritos = async () => {
   try {
     const guardado = await AsyncStorage.getItem(FAVORITOS_KEY);
     const ids = guardado ? JSON.parse(guardado) : [];
-    return ids.map((x) => Number(x)).filter((x) => !Number.isNaN(x));
+    return ids.map((id) => Number(id)).filter((id) => !Number.isNaN(id));
   } catch (error) {
     console.error('Error al obtener listado de favoritos:', error);
     return [];

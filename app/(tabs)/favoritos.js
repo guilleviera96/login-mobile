@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { FlatList, Text, View, StyleSheet, ActivityIndicator } from 'react-native';
 import { useFocusEffect } from 'expo-router';
 import api from '../../api/api';
-import { obtenerFavoritos } from '../../utils/favoritosActions';
+import { obtenerFavoritos, eliminarFavorito } from '../../utils/favoritosActions';
 import MovieCard from '../../components/MovieCard';
 
 export default function FavoritosScreen() {
@@ -39,6 +39,12 @@ export default function FavoritosScreen() {
     }, [loadFavorites])
   );
 
+  
+  const handleRemove = async (id) => {
+    await eliminarFavorito(id);
+    setFavData((prev) => prev.filter((item) => item.id !== id));
+  };
+
   if (loading) {
     return (
       <View style={styles.center}>
@@ -67,6 +73,7 @@ export default function FavoritosScreen() {
           title={item.name}
           rating={item.rating?.average}
           image={item.image?.medium}
+          onRemoveFavorite={handleRemove} // 👈 callback definido
         />
       )}
     />
@@ -74,10 +81,6 @@ export default function FavoritosScreen() {
 }
 
 const styles = StyleSheet.create({
-  center: {
-    flex: 1, alignItems: 'center', justifyContent: 'center', padding: 20,
-  },
-  list: {
-    paddingVertical: 16, alignItems: 'center', gap: 12,
-  },
+  center: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 20 },
+  list: { paddingVertical: 16, alignItems: 'center', gap: 12 },
 });
