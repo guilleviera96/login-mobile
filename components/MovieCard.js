@@ -1,29 +1,58 @@
-import { Text, Image, TouchableOpacity } from 'react-native';
+import { Text, Image, TouchableOpacity, View } from 'react-native';
 import { useRouter } from 'expo-router';
+import { agregarFavoritos, eliminarFavorito, obtenerFavoritos } from '../utils/favoritosActions';
+import { useEffect, useState } from 'react';
 
 const MovieCard = ({ id, title, rating, image }) => {
   const router = useRouter();
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    const checkFavorite = async () => {
+      const favoritos = await obtenerFavoritos();
+      setIsFavorite(favoritos.includes(id));
+    };
+    checkFavorite();
+  }, [id]);
+
+  const toggleFavorite = async () => {
+    if (isFavorite) {
+      await eliminarFavorito(id);
+      setIsFavorite(false);
+    } else {
+      await agregarFavoritos(id);
+      setIsFavorite(true);
+    }
+  };
 
   return (
-    <TouchableOpacity
-      onPress={() => {
-        console.log(`/informacion/${id}`);
-        router.push(`/informacion/${id}`);
-      }}
+    <View style={{ marginBottom: 24, alignItems: 'center' }}>
+      <TouchableOpacity onPress={() => router.push(`/informacion/${id}`)}>
+        <Image
+          source={{ uri: image }}
+          style={{ width: 300, height: 420, borderRadius: 22.5 }}
+          resizeMode="cover"
+        />
+      </TouchableOpacity>
 
-      style={{ marginBottom: 24, alignItems: 'center' }}
-    >
-      <Image
-        source={{ uri: image }}
-        style={{ width: 300, height: 420, borderRadius: 22.5 }}
-        resizeMode="cover"
-      />
       <Text style={{ fontSize: 20, fontWeight: 'bold', marginTop: 8 }}>{title}</Text>
-      <Text style={{ fontSize: 20, color: 'black' }}> {rating}</Text>
-      <Text style={{ fontSize: 20, color: '#50b4a3ff', fontWeight: 'bold', marginTop: 4 }}>
-        Acerca de la serie
-      </Text>
-    </TouchableOpacity>
+      <Text style={{ fontSize: 20, color: 'black' }}>{rating}</Text>
+
+      <TouchableOpacity
+        onPress={toggleFavorite}
+        style={{
+          marginTop: 10,
+          backgroundColor: isFavorite ? '#df2121ff' : '#50b4a3ff',
+          paddingHorizontal: 16,
+          paddingVertical: 8,
+          borderRadius: 8,
+        }}
+      >
+        <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'black' }}>
+          {isFavorite ? 'Quitar de Favoritos' : 'Agregar a Favoritos'}
+        </Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 

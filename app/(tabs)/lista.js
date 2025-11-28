@@ -3,6 +3,7 @@ import { useMovieList } from '../../hooks/useMovieList';
 import MovieCard from '../../components/MovieCard';
 import mostrarRating from './../../functions/mostrarRating';
 
+
 const Lista = () => {
   const { items: shows } = useMovieList('shows');
   return (

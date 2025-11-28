@@ -9,12 +9,12 @@ export default function TabLayout() {
           title: 'Series',
         }}
       />
-      {/* <Tabs.Screen
-        name='informacion/[id]'
+      <Tabs.Screen
+        name='favoritos'
         options={{
-          title: 'Informacion',
+          title: 'Favoritos',
         }}
-      /> */}
+      />
     </Tabs>
   );
 }
