@@ -21,7 +21,7 @@ const MovieCard = ({ id, title, rating, image }) => {
       <Text style={{ fontSize: 20, fontWeight: 'bold', marginTop: 8 }}>{title}</Text>
       <Text style={{ fontSize: 20, color: 'black' }}> {rating}</Text>
       <Text style={{ fontSize: 20, color: '#50b4a3ff', fontWeight: 'bold', marginTop: 4 }}>
-        Ver más
+        Acerca de la serie
       </Text>
     </TouchableOpacity>
   );
