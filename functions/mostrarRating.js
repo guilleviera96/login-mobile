@@ -1,15 +1,9 @@
 export default function mostrarRating(rating) {
   const lleno = Math.floor(rating);   
-  const mitad = rating % 1 !== 0;      
-  const stars = [];
+  const estrellas = [];
   for (let i = 0; i < lleno; i++) {
-    stars.push("★");
+    estrellas.push("★");
   }
-
-  if (mitad) {
-    stars.push("⯨"); 
-  }
-
-  return stars.join(" ");
+  return estrellas.join(" ");
 }
 

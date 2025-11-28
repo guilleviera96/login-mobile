@@ -31,16 +31,28 @@ export default function Informacion() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Image source={{ uri: showsById.image?.original }} style={styles.image} resizeMode="cover" />
-      <Text style={styles.title}>{showsById.name}</Text>
-<Text style={styles.rating}>
-{showsById.rating?.average
-    ? `${mostrarRating(showsById.rating.average)} ${showsById.rating.average}`
-    : 'Sin calificación'}
-</Text>      <Text style={styles.genres}>{showsById.genres?.join(' - ')}</Text>
+      {showsById.image?.original && (
+        <Image
+          source={{ uri: showsById.image.original }}
+          style={styles.image}
+          resizeMode="cover"
+        />
+      )}
+      <Text style={styles.title}>{showsById.name ?? ''}</Text>
+      <Text style={styles.rating}>
+        {showsById.rating?.average
+          ? `${mostrarRating(showsById.rating.average)} ${showsById.rating.average}`
+          : 'Sin calificación'}
+      </Text>
+      <Text style={styles.genres}>
+        {Array.isArray(showsById.genres) ? showsById.genres.join(' - ') : ''}
+      </Text>
       <Text style={styles.summary}>
-        {showsById.summary?.replace(/<[^>]+>/g, '')}
-      </Text>    </ScrollView>
+        {typeof showsById.summary === 'string'
+          ? showsById.summary.replace(/<[^>]+>/g, '')
+          : ''}
+      </Text>
+    </ScrollView>
   );
 }
 
@@ -73,13 +85,13 @@ const styles = StyleSheet.create({
   },
   genres: {
     fontSize: 18,
-    fontWeight: '455',
+    fontWeight: '400',
     color: '#50b4a3ff',
     marginBottom: 8,
   },
   summary: {
     fontSize: 20,
-    fontWeight: '450',
+    fontWeight: '400',
     lineHeight: 20,
     textAlign: 'justify',
   },
