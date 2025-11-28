@@ -1,0 +1,30 @@
+import { Text, Image, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
+
+const MovieCard = ({ id, title, rating, image }) => {
+  const router = useRouter();
+
+  return (
+    <TouchableOpacity
+      onPress={() => {
+        console.log(`/informacion/${id}`);
+        router.push(`/informacion/${id}`);
+      }}
+
+      style={{ marginBottom: 24, alignItems: 'center' }}
+    >
+      <Image
+        source={{ uri: image }}
+        style={{ width: 300, height: 420, borderRadius: 22.5 }}
+        resizeMode="cover"
+      />
+      <Text style={{ fontSize: 20, fontWeight: 'bold', marginTop: 8 }}>{title}</Text>
+      <Text style={{ fontSize: 20, color: 'black' }}> {rating}</Text>
+      <Text style={{ fontSize: 20, color: '#50b4a3ff', fontWeight: 'bold', marginTop: 4 }}>
+        Acerca de la serie
+      </Text>
+    </TouchableOpacity>
+  );
+};
+
+export default MovieCard;
