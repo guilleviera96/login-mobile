@@ -1,6 +1,7 @@
 import { ScrollView, View, StyleSheet } from 'react-native';
 import { useMovieList } from '../../hooks/useMovieList';
 import MovieCard from '../../components/MovieCard';
+import mostrarRating from './../../functions/mostrarRating';
 
 const Lista = () => {
   const { items } = useMovieList('shows');
@@ -12,7 +13,8 @@ const Lista = () => {
             key={item.id}
             id={item.id}
             title={item.title}
-            rating={item.rating}
+            rating={`${mostrarRating(item.rating)} ${item.rating}`
+}
             image={item.image}
           />
 

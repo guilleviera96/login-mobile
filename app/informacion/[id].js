@@ -2,6 +2,7 @@ import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { View, Text, Image, ActivityIndicator, ScrollView, StyleSheet } from 'react-native';
 import axios from 'axios';
+import mostrarRating from './../../functions/mostrarRating';
 
 export default function Informacion() {
   const { id } = useLocalSearchParams();
@@ -45,9 +46,12 @@ export default function Informacion() {
     <ScrollView contentContainerStyle={styles.container}>
       <Image source={{ uri: data.image?.original }} style={styles.image} resizeMode="cover" />
       <Text style={styles.title}>{data.name}</Text>
-      <Text style={styles.rating}>{data.rating?.average || 'Sin calificación'}</Text>
+      <Text style={styles.rating}>
+        {data.rating?.average
+          ? `${mostrarRating(data.rating.average)} ${data.rating.average}`
+          : 'Sin calificación'}
+      </Text>
       <Text style={styles.genres}>{data.genres.join(', ')}</Text>
-      {/* eliminar etiquetas html */}
       <Text style={styles.summary}>{data.summary?.replace(/<[^>]+>/g, '')}</Text>
     </ScrollView>
   );
