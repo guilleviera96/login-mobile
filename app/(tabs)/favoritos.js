@@ -1,49 +1,16 @@
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import { FlatList, Text, View, StyleSheet, ActivityIndicator } from 'react-native';
 import { useFocusEffect } from 'expo-router';
-import api from '../../api/api';
-import { obtenerFavoritos, eliminarFavorito } from '../../utils/favoritosActions';
 import MovieCard from '../../components/MovieCard';
-
+import { useFavorites } from '../../hooks/useFavorites';
 export default function FavoritosScreen() {
-  const [favData, setFavData] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  const loadFavorites = useCallback(async () => {
-    setLoading(true);
-    try {
-      const ids = await obtenerFavoritos();
-      const normalized = ids.map((x) => Number(x)).filter((x) => !Number.isNaN(x));
-
-      if (normalized.length === 0) {
-        setFavData([]);
-        setLoading(false);
-        return;
-      }
-
-      const data = await Promise.all(
-        normalized.map((id) => api.get(`/shows/${id}`).then((res) => res.data))
-      );
-      setFavData(data);
-    } catch (error) {
-      console.error('Error cargando favoritos:', error);
-      setFavData([]);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const { favData, loading, loadFavorites, removeFavorite } = useFavorites();
 
   useFocusEffect(
     useCallback(() => {
       loadFavorites();
     }, [loadFavorites])
   );
-
-  
-  const handleRemove = async (id) => {
-    await eliminarFavorito(id);
-    setFavData((prev) => prev.filter((item) => item.id !== id));
-  };
 
   if (loading) {
     return (
@@ -73,7 +40,7 @@ export default function FavoritosScreen() {
           title={item.name}
           rating={item.rating?.average}
           image={item.image?.medium}
-          onRemoveFavorite={handleRemove} // 👈 callback definido
+          onRemoveFavorite={removeFavorite}
         />
       )}
     />
